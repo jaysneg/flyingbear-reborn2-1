@@ -1,5 +1,5 @@
 #!/bin/bash
-SD_PATH=~octoprint/.octoprint/uploads
+SD_PATH=/home/mks/printer_data/config/macros
 cat ${2} > /tmp/plrtmpA.$$
 cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' > ${SD_PATH}/plr.gcode
 echo 'G91' >> ${SD_PATH}/plr.gcode
