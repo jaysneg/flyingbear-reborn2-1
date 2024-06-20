@@ -13,7 +13,7 @@ cat "${gcode_path}/${2}" > ${temp_path}/plrtmpA.$$
 isInFile=$(cat /tmp/plrtmpA.$$ | grep -c "thumbnail")
 if [ $isInFile -eq 0 ]; then
      echo 'M109 S200.0' > "${new_gcode_path}/${new_gcode_file_name}"
-     cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> "${new_gcode_path}/${new_gcode_file_name}"
+     cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\) /SET_KINEMATIC_POSITION Z=\1/p' >> "${new_gcode_path}/${new_gcode_file_name}"
 else
     sed -i '1s/^/;start copy\n/' /tmp/plrtmpA.$$
     sed -n '/;start copy/, /thumbnail end/ p' < /tmp/plrtmpA.$$ > "${new_gcode_path}/${new_gcode_file_name}"
