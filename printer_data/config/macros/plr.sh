@@ -6,35 +6,35 @@ new_gcode_file_name=${2}
 ############################################
 
 echo "interupted print ${gcode_path}/${2}"
-cat "${gcode_path}/${2}" > ${temp_path}/plrtmpA.$$
+cat ${gcode_path}/${2} > ${temp_path}/plrtmpA.$$
 
 isInFile=$(cat /tmp/plrtmpA.$$ | grep -c "thumbnail")
 if [ $isInFile -eq 0 ]; then
-     echo 'M109 S200.0' > "${temp_path}/${new_gcode_file_name}"
-     cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> "${temp_path}/${new_gcode_file_name}"
+     echo 'M109 S200.0' > ${temp_path}/${new_gcode_file_name}
+     cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> ${temp_path}/${new_gcode_file_name}
 else
     sed -i '1s/^/;start copy\n/' /tmp/plrtmpA.$$
-    sed -n '/;start copy/, /thumbnail end/ p' < /tmp/plrtmpA.$$ > "${temp_path}/${new_gcode_file_name}"
-    echo ';' >> "${temp_path}/${new_gcode_file_name}"
-    echo '' >> "${temp_path}/${new_gcode_file_name}"
-    echo 'M109 S199.0' >> "${temp_path}/${new_gcode_file_name}"
-    cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> "${temp_path}/${new_gcode_file_name}"
+    sed -n '/;start copy/, /thumbnail end/ p' < /tmp/plrtmpA.$$ > ${temp_path}/${new_gcode_file_name}
+    echo ';' >> ${temp_path}/${new_gcode_file_name}
+    echo '' >> ${temp_path}/${new_gcode_file_name}
+    echo 'M109 S199.0' >> ${temp_path}/${new_gcode_file_name}
+    cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> ${temp_path}/${new_gcode_file_name}
 fi
-echo 'G91' >> "${temp_path}/${new_gcode_file_name}"
-echo 'G1 Z5' >> "${temp_path}/${new_gcode_file_name}"
-echo 'G90' >> "${temp_path}/${new_gcode_file_name}"
-echo 'G28 X Y' >> "${temp_path}/${new_gcode_file_name}"
+echo 'G91' >> ${temp_path}/${new_gcode_file_name}
+echo 'G1 Z5' >> ${temp_path}/${new_gcode_file_name}
+echo 'G90' >> ${temp_path}/${new_gcode_file_name}
+echo 'G28 X Y' >> ${temp_path}/${new_gcode_file_name}
 
 # Extruder Temp
 # Bring print_temp in save_variables.cfg
-echo 'M104 S'${3} >> "${temp_path}/${new_gcode_file_name}"
-echo 'M109 S'${3} >> "${temp_path}/${new_gcode_file_name}"
+echo 'M104 S'${3} >> ${temp_path}/${new_gcode_file_name}
+echo 'M109 S'${3} >> ${temp_path}/${new_gcode_file_name}
 
-# cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M104\|M140\|M109\|M190\|M106\)/p' >> "${temp_path}/${new_gcode_file_name}"
-# cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M140\|M190\|M106\)/p' >> "${temp_path}/${new_gcode_file_name}"
+# cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M104\|M140\|M109\|M190\|M106\)/p' >> ${temp_path}/${new_gcode_file_name}
+# cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M140\|M190\|M106\)/p' >> ${temp_path}/${new_gcode_file_name}
 
 # Find the last M106 before Z_LOG
-cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M106\)/p' | head -1 >> "${temp_path}/${new_gcode_file_name}"
+cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M106\)/p' | head -1 >> ${temp_path}/${new_gcode_file_name}
 
 # Bed Temp
 # Find material_bed_temperature after ;End of Gcode
