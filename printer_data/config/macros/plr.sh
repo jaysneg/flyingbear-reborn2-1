@@ -20,7 +20,7 @@ else
     echo ';' >> "${new_gcode_path}/${new_gcode_file_name}"
     echo '' >> "${new_gcode_path}/${new_gcode_file_name}"
     echo 'M109 S199.0' >> "${new_gcode_path}/${new_gcode_file_name}"
-    cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> "${new_gcode_path}/${new_gcode_file_name}"
+    cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\) /SET_KINEMATIC_POSITION Z=\1/p' >> "${new_gcode_path}/${new_gcode_file_name}"
 fi
 echo 'G91' >> "${new_gcode_path}/${new_gcode_file_name}"
 echo 'G1 Z5' >> "${new_gcode_path}/${new_gcode_file_name}"
