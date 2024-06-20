@@ -7,6 +7,7 @@ new_gcode_file_name=${2}
 ############################################
 
 echo "interupted print ${gcode_path}/${2}"
+rm "${new_gcode_path}/${new_gcode_file_name}"
 cat "${gcode_path}/${2}" > ${temp_path}/plrtmpA.$$
 
 isInFile=$(cat /tmp/plrtmpA.$$ | grep -c "thumbnail")
