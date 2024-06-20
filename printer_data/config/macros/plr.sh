@@ -5,6 +5,7 @@ temp_path=/tmp
 new_gcode_file_name=${2}
 ############################################
 
+echo "interupted print ${gcode_path}/${2}"
 cat "${gcode_path}/${2}" > ${temp_path}/plrtmpA.$$
 
 isInFile=$(cat /tmp/plrtmpA.$$ | grep -c "thumbnail")
@@ -15,7 +16,7 @@ else
     sed -i '1s/^/;start copy\n/' /tmp/plrtmpA.$$
     sed -n '/;start copy/, /thumbnail end/ p' < /tmp/plrtmpA.$$ > "${temp_path}/${new_gcode_file_name}"
     echo ';' >> "${temp_path}/${new_gcode_file_name}"
-    echo '' >> "${temp_path}${new_gcode_file_name}"
+    echo '' >> "${temp_path}/${new_gcode_file_name}"
     echo 'M109 S199.0' >> "${temp_path}/${new_gcode_file_name}"
     cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> "${temp_path}/${new_gcode_file_name}"
 fi
