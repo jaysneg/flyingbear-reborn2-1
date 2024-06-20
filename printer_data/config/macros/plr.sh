@@ -1,8 +1,8 @@
 #!/bin/bash
 ############################################
 gcode_path=/home/mks/printer_data/gcodes
-temp_path=/home/mks/printer_data/gcodes/interupted
-new_gcode_file_name=${2}
+temp_path=/home/mks/printer_data/gcodes
+new_gcode_file_name=interupted_${2}
 ############################################
 
 echo "interupted print ${gcode_path}/${2}"
