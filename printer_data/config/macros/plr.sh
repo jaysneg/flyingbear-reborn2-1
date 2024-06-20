@@ -2,7 +2,7 @@
 ############################################
 temp_path=/home/mks/printer_data/gcodes
 temp_path=/tmp
-new_gcode_file_name=${2}
+new_gcode_file_name="${2}"
 ############################################
 
 cat ${temp_path}/${2} > ${temp_path}/plrtmpA.$$
