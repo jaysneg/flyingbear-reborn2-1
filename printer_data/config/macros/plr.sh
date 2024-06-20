@@ -54,5 +54,5 @@ echo 'G1 Z-5' >> ${temp_path}/${new_gcode_file_name}
 echo 'G90' >> ${temp_path}/${new_gcode_file_name}
 
 # Copy from fisrt G1 Z...
-tac /tmp/plrtmpA.$$ | sed -e '/ Z'${1}'[^0-9]*$/q' | tac | tail -n+2 | sed -ne '/ Z/,$ p' >> "${temp_path}/${new_gcode_file_name}"
+tac /tmp/plrtmpA.$$ | sed -e '/ Z'${1}'[^0-9]*$/q' | tac | tail -n+2 | sed -ne '/ Z/,$ p' >> ${temp_path}/${new_gcode_file_name}
 /bin/sleep 5
