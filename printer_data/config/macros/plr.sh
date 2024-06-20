@@ -41,9 +41,12 @@ cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M106\)/p' | head -1 >> "${
 # Bed Temp
 # Find material_bed_temperature after ;End of Gcode
 # cat /tmp/plrtmpA.$$ | sed -ne '/;End of Gcode/,$ p' | tr '\n' ' ' | sed -ne 's/ ;[^ ]* //gp' | sed -ne 's/\\\\n/;/gp' | tr ';' '\n' | grep material_print_temperature | sed -ne 's/.* = /M104 S/p' | head -1 >> "${new_gcode_path}/${new_gcode_file_name}"
-cat /tmp/plrtmpA.$$ | sed -ne '/;End of Gcode/,$ p' | tr '\n' ' ' | sed -ne 's/ ;[^ ]* //gp' | sed -ne 's/\\\\n/;/gp' | tr ';' '\n' | grep material_bed_temperature | sed -ne 's/.* = /M140 S/p' | head -1 >> "${new_gcode_path}/${new_gcode_file_name}"
+#cat /tmp/plrtmpA.$$ | sed -ne '/;End of Gcode/,$ p' | tr '\n' ' ' | sed -ne 's/ ;[^ ]* //gp' | sed -ne 's/\\\\n/;/gp' | tr ';' '\n' | grep material_bed_temperature | sed -ne 's/.* = /M140 S/p' | head -1 >> "${new_gcode_path}/${new_gcode_file_name}"
 # cat /tmp/plrtmpA.$$ | sed -ne '/;End of Gcode/,$ p' | tr '\n' ' ' | sed -ne 's/ ;[^ ]* //gp' | sed -ne 's/\\\\n/;/gp' | tr ';' '\n' | grep material_print_temperature | sed -ne 's/.* = /M109 S/p' | head -1 >> "${new_gcode_path}/${new_gcode_file_name}"
-cat /tmp/plrtmpA.$$ | sed -ne '/;End of Gcode/,$ p' | tr '\n' ' ' | sed -ne 's/ ;[^ ]* //gp' | sed -ne 's/\\\\n/;/gp' | tr ';' '\n' | grep material_bed_temperature | sed -ne 's/.* = /M190 S/p' | head -1 >> "${new_gcode_path}/${new_gcode_file_name}"
+#cat /tmp/plrtmpA.$$ | sed -ne '/;End of Gcode/,$ p' | tr '\n' ' ' | sed -ne 's/ ;[^ ]* //gp' | sed -ne 's/\\\\n/;/gp' | tr ';' '\n' | grep material_bed_temperature | sed -ne 's/.* = /M190 S/p' | head -1 >> "${new_gcode_path}/${new_gcode_file_name}"
+# Bring print_bed_temp in save_variables.cfg
+echo 'M104 S'${4} >> "${new_gcode_path}/${new_gcode_file_name}"
+echo 'M109 S'${4} >> "${new_gcode_path}/${new_gcode_file_name}"
 
 
 # Extruder lenght G92 Extruder
