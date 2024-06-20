@@ -29,7 +29,7 @@ echo 'G28 X Y' >> "${temp_path}/${new_gcode_file_name}"
 echo 'M104 S'${3} >> "${temp_path}/${new_gcode_file_name}"
 echo 'M109 S'${3} >> "${temp_path}/${new_gcode_file_name}"
 
-# cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M104\|M140\|M109\|M190\|M106\)/p' >> ${temp_path}/${new_gcode_file_name}
+# cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M104\|M140\|M109\|M190\|M106\)/p' >> "${temp_path}/${new_gcode_file_name}"
 # cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M140\|M190\|M106\)/p' >> ${temp_path}/${new_gcode_file_name}
 
 # Find the last M106 before Z_LOG
