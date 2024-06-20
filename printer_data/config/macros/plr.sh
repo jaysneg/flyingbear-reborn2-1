@@ -30,10 +30,10 @@ echo 'M104 S'${3} >> "${temp_path}/${new_gcode_file_name}"
 echo 'M109 S'${3} >> "${temp_path}/${new_gcode_file_name}"
 
 # cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M104\|M140\|M109\|M190\|M106\)/p' >> "${temp_path}/${new_gcode_file_name}"
-# cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M140\|M190\|M106\)/p' >> ${temp_path}/${new_gcode_file_name}
+# cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M140\|M190\|M106\)/p' >> "${temp_path}/${new_gcode_file_name}"
 
 # Find the last M106 before Z_LOG
-cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M106\)/p' | head -1 >> ${temp_path}/${new_gcode_file_name}
+cat /tmp/plrtmpA.$$ | sed '/ Z'${1}'/q' | sed -ne '/\(M106\)/p' | head -1 >> "${temp_path}/${new_gcode_file_name}"
 
 # Bed Temp
 # Find material_bed_temperature after ;End of Gcode
