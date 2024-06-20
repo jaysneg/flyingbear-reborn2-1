@@ -1,11 +1,11 @@
 #!/bin/bash
 ############################################
-temp_path=/home/mks/printer_data/gcodes
+gcode_path=/home/mks/printer_data/gcodes
 temp_path=/tmp
 new_gcode_file_name=${2}
 ############################################
 
-cat "${temp_path}/${2}" > ${temp_path}/plrtmpA.$$
+cat "${gcode_path}/${2}" > ${temp_path}/plrtmpA.$$
 
 isInFile=$(cat /tmp/plrtmpA.$$ | grep -c "thumbnail")
 if [ $isInFile -eq 0 ]; then
