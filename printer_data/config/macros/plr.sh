@@ -13,9 +13,9 @@ if [ $isInFile -eq 0 ]; then
      cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> ${temp_path}/${new_gcode_file_name}
 else
     sed -i '1s/^/;start copy\n/' /tmp/plrtmpA.$$
-    sed -n '/;start copy/, /thumbnail end/ p' < /tmp/plrtmpA.$$ > ${temp_path}/${new_gcode_file_name}
-    echo ';' >> ${temp_path}/${new_gcode_file_name}
-    echo '' >> ${temp_path}${new_gcode_file_name}
+    sed -n '/;start copy/, /thumbnail end/ p' < /tmp/plrtmpA.$$ > "${temp_path}/${new_gcode_file_name}"
+    echo ';' >> "${temp_path}/${new_gcode_file_name}"
+    echo '' >> "${temp_path}${new_gcode_file_name}"
     echo 'M109 S199.0' >> ${temp_path}/${new_gcode_file_name}
     cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> ${temp_path}/${new_gcode_file_name}   
 fi
