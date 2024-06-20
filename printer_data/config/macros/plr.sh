@@ -5,7 +5,7 @@ temp_path=/tmp
 new_gcode_file_name=${2}
 ############################################
 
-cat ${temp_path}/${2} > ${temp_path}/plrtmpA.$$
+cat "${temp_path}/${2}" > ${temp_path}/plrtmpA.$$
 
 isInFile=$(cat /tmp/plrtmpA.$$ | grep -c "thumbnail")
 if [ $isInFile -eq 0 ]; then
