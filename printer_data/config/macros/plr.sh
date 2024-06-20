@@ -2,14 +2,14 @@
 ############################################
 temp_path=/home/mks/printer_data/gcodes
 temp_path=/tmp
-new_gcode_file_name="${2}"
+new_gcode_file_name=${2}
 ############################################
 
 cat ${temp_path}/${2} > ${temp_path}/plrtmpA.$$
 
 isInFile=$(cat /tmp/plrtmpA.$$ | grep -c "thumbnail")
 if [ $isInFile -eq 0 ]; then
-     echo 'M109 S200.0' > ${temp_path}/${new_gcode_file_name}
+     echo 'M109 S200.0' > "${temp_path}/${new_gcode_file_name}"
      cat /tmp/plrtmpA.$$ | sed -e '1,/Z'${1}'/ d' | sed -ne '/ Z/,$ p' | grep -m 1 ' Z' | sed -ne 's/.* Z\([^ ]*\)/SET_KINEMATIC_POSITION Z=\1/p' >> ${temp_path}/${new_gcode_file_name}
 else
     sed -i '1s/^/;start copy\n/' /tmp/plrtmpA.$$
